@@ -4,7 +4,7 @@ const User = require('../models/user');
 const authenticate = require('../middlewares/Auth'); 
 
 // GET Route
-router.get('/', authenticate, async (req, res) => {
+router.get('/', authenticate, async (req, res,next) => {
   try {
     console.log('Authenticated user:', req.user);
 
@@ -25,19 +25,19 @@ router.get('/', authenticate, async (req, res) => {
 // POST Route
 router.post('/', authenticate, async (req, res) => {
   const { phone, address } = req.body;
-
+  
   console.log('Incoming profile update data:', { phone, address });
   console.log('Authenticated user:', req.user);
 
   try {
-    const user = await User.findById(req.user.id); // Use req.user.id
+    const user = await User.findByIdAndUpdate(req.user.id,{ phone, address }); // Use req.user.id
     if (!user) {
       console.error('User not found');
       return res.status(404).json({ error: 'User not found' });
     }
 
-    user.phone = phone || user.phone;
-    user.address = address || user.address;
+    // user.phone = phone || user.phone;
+    // user.address = address || user.address;
 
     await user.save();
 

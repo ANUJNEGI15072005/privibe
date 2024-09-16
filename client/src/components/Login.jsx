@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loginUser } from './authUtilis'; 
-import Cookies from 'js-cookie';
+
 
 function Login() {
   const [loginInfo, setLoginInfo] = useState({
@@ -123,7 +123,7 @@ function Login() {
             Login
           </button>
           <span className="block text-center text-gray-600">
-            Don't have an account?{' '}
+            Don&nbsp;t have an account?{' '}
             <Link to="/signup" className="text-purple-600 hover:underline">Signup</Link>
           </span>
         </form>

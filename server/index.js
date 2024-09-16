@@ -27,10 +27,18 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 
+
 app.use(bodyParser.json()); 
 app.use(cors());  
 
 app.use(express.static(path.join(__dirname, '../client/dist'))); 
+app.use(
+(req, res, next) => {
+  console.log(
+    " Middleware has and access to the request object, responses object, and next, it can process the request before the server sends a response. 🧿"
+  );
+  next();
+})
 
 app.use('/auth', AuthRouter); 
 app.use('/api/manifest', ManifestRouter);  

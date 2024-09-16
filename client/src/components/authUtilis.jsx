@@ -9,12 +9,15 @@ export const loginUser = async (credentials) => {
     });
 
     const result = await response.json();
-    const { success, message, token, name, email } = result;
+    const { success, message, token, name, email,phone,address } = result;
 
     if (success) {
       Cookies.set('token', token);
       Cookies.set('name', name);  
       Cookies.set('email', email); 
+      Cookies.set('phone', phone);
+      Cookies.set('address', address);
+
 
       return { success: true, message };
     } else {

@@ -1,4 +1,9 @@
+const User = require("../models/user")
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
+console.log(process.env.JWT_SECRET)
 const authenticate = async (req, res, next) => {
+
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     console.error('No token provided');
@@ -16,6 +21,7 @@ const authenticate = async (req, res, next) => {
       return res.status(401).json({ error: 'User not found' });
     }
     req.user = { id: decoded.id }; 
+    console.log(req.user.id)
     next();
   } catch (error) {
     console.error('Invalid token:', error);

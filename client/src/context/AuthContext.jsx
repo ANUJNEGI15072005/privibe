@@ -1,8 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import  { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie'; 
 
 const AuthContext = createContext();
 
+
+// eslint-disable-next-line react/prop-types
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState('');
@@ -32,7 +34,7 @@ export function AuthProvider({ children }) {
     const email = Cookies.get('email');
     const name = Cookies.get('name');
     
-    setIsAuthenticated(!!token);
+    setIsAuthenticated(token);
     setUserEmail(email || '');
     setUserName(name || ''); 
   };
@@ -48,6 +50,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext);
 }

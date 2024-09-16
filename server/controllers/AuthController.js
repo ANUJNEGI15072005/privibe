@@ -31,7 +31,8 @@ const signToken = (id) => {
         data: {
           token,
           name: userModel.name,  
-          email: userModel.email
+          email: userModel.email,
+          id:userModel._id
         }
       });
     } catch (err) {
@@ -67,7 +68,10 @@ const login = async(req, res) =>{
                 success: true,
                 token,
                 email,
-                name: user.name
+                name: user.name,
+                phone:user.phone,
+                address:user.address
+
             })
     }catch({name,message}) {
         res.status(500)
